@@ -1,0 +1,18 @@
+html {
+    cursor: url("../images/decorations/cursor.cur"), auto;
+}
+
+body {
+    background: url("../images/bg.jpg");
+}
+
+.jumbotron {
+    background-color: #f68b1e;
+    text-align: center;
+    color: #fcfd09;
+    border-radius: 50%;
+}
+
+button:hover {
+    cursor: url("../images/decorations/cursor.cur"), auto;
+}
