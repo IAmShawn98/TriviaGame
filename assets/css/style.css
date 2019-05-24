@@ -7,12 +7,40 @@ body {
 }
 
 .jumbotron {
+    background: url("../images/splatTexture.png");
     background-color: #f68b1e;
     text-align: center;
-    color: #fcfd09;
     border-radius: 50%;
+}
+
+.btn {
+    position: relative;
+    top: 35px;
+    color: orange;
+    font-size: 100%;
+    text-shadow: 2px 2px 2px #000000 !important;
+    background: url("../images/btnSplatGreen.png");
+    padding: 2% !important;
+    width: 150px;
 }
 
 button:hover {
     cursor: url("../images/decorations/cursor.cur"), auto;
+}
+
+a {
+    cursor: url("../images/decorations/cursor.cur"), auto;
+}
+
+.card {
+    border: none !important;
+}
+
+.card-header {
+    background-color: #ff7f27 !important;
+    color: #fcfd09;
+}
+
+.Description {
+    font-size: 200%;
 }
