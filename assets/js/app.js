@@ -26,7 +26,7 @@ $(document).ready(function () {
         // Timer: Deducts seconds from the 'seconds' variable.
         var timeRemaining = setInterval(function () {
             // Deduct time from player.
-            time.text(secondsLeft--);
+            time.text("Time Remaining: " + secondsLeft--);
             // PLUS: If the player runs out of time for a question, let them know, wait five seconds, then continue.
             if (secondsLeft === -1) {
                 // alert("Times Up!");
