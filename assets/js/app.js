@@ -11,7 +11,7 @@ $(document).ready(function () {
     var pCorrectAnswers = $(".pCorrectAnswers"); // The correct answer element.
     var pIncorrectAnswers = $(".pIncorrectAnswers"); // The incorrect answer element.
     var vid = document.getElementById("correctVideo"); // Play a random clip when the player wins.
-
+    var populateNextQuestionBtn = $("#populateNextQuestionBtn");
 
     // When the player clicks on 'Play Now!' a new trivia session is created by the function 'newTriviaSession()'.
     $("#playNow").on("click", function () {
@@ -77,9 +77,10 @@ $(document).ready(function () {
             // wait five seconds!
             console.log("Win Condition: Playing video, waiting five seconds...")
             setTimeout(() => {
+                // Remove finished video.
                 vid.remove();
                 console.log("Win Condition: Time out, removing video....")
-                // <button class="btn btn-warning font-weight-bold text-white">Next Question</button>
+                $('#populateNextQuestionBtn').append('<button class="btn btn-warning text-white p-3 font-weight-bold" id="nextQuestion">Next Question</button>');
                 console.log("Win Condition: Populating continue button to start the next question.")
             }, 5000);
         }
