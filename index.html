@@ -74,19 +74,22 @@
         </div>
     </div>
 
-    <!-- End Trivia Totals -->
-    <div style="display: none;" id="resultMenu" class="container text-center">
+    <!-- Player Current Score -->
+    <div style="display: none;" id="currentScore" class="container text-center">
         <!-- Card Head Brand -->
         <div class="card">
             <div class="card-header bg-warning font-weight-bold">
-                <h1>Here are your results!</h1>
+                <h1>90s Nickelodeon Cartoon Trivia!</h1>
             </div>
             <div class="card-body">
-                <h1>You've Answered An Astonishing: </h1>
+                <h1 class="text-success">Fantastic Job!</h1>
                 <!-- Correct Answers -->
-                <div id="pCorrectAnswers">0</div>
-                <!-- Incorrect Answers -->
-                <div id="pIncorrectAnswers">0</div>
+                <h4 class="pCorrectAnswers">Correct Answers: 0</h4>
+                <video class="mt-3" id="correctVideo" width="600">
+                    <source src="assets/correctClips/correct1.mp4" type="video/mp4">
+                    <source src="mov_bbb.ogg" type="video/ogg">
+                    Your browser does not support HTML5 video.
+                </video>
             </div>
         </div>
     </div>
@@ -101,9 +104,9 @@
             <div class="card-body">
                 <h1>You've Answered An Astonishing: </h1>
                 <!-- Correct Answers -->
-                <div id="pCorrectAnswers">0</div>
+                <div class="pCorrectAnswers">0</div>
                 <!-- Incorrect Answers -->
-                <div id="pIncorrectAnswers">0</div>
+                <div class="pIncorrectAnswers">0</div>
             </div>
         </div>
     </div>

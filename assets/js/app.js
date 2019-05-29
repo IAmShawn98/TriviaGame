@@ -6,12 +6,12 @@ $(document).ready(function () {
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
 
-
     // Define Elements.
     var time = $("#timeRemaining p"); // The timer element.
+    var pCorrectAnswers = $(".pCorrectAnswers"); // The correct answer element.
+    var pIncorrectAnswers = $(".pIncorrectAnswers"); // The incorrect answer element.
+    var vid = document.getElementById("correctVideo"); // Play a random clip when the player wins.
 
-    var pCorrectAnswers = $("#pCorrectAnswers"); // The correct answer element.
-    var pIncorrectAnswers = $("#pIncorrectAnswers"); // The incorrect answer element.
 
     // When the player clicks on 'Play Now!' a new trivia session is created by the function 'newTriviaSession()'.
     $("#playNow").on("click", function () {
@@ -50,7 +50,7 @@ $(document).ready(function () {
             },
             {
                 // Question being asked to the player.
-                question: "In which cartoon was the main character nicknamed, 'Football Head'?",
+                question: "In which cartoon was the main character nicknamed 'Football Head'?",
                 //  4.) Multiple choice questions for the player to pick from.
                 choices: ["Hey Jerry", "Hey Dude", "Hey Arnold", "Sup Brotha"],
                 // The correct answer.
@@ -58,8 +58,7 @@ $(document).ready(function () {
             },
         ];
 
-
-        // If the player wins, do this.
+        // If the player finishes the game, do this.
         var endGameResults = function () {
             // Hide game.
             $("#game").hide();
@@ -69,17 +68,19 @@ $(document).ready(function () {
 
         // If the player wins, do this.
         var playerCorrect = function () {
+            // Start correct answer video.
+            vid.play()
             // Hide game.
             $("#game").hide();
             // Show score so far.
-            $("#resultMenu").show();
+            $("#currentScore").show();
             // wait five seconds!
-            console.log("Waiting five seconds....")
+            console.log("Win Condition: Playing video, waiting five seconds...")
             setTimeout(() => {
-                // Hide these results.
-                console.log("Hide results!");
-                // Get back to the game!
-                console.log("Get back to the game!");
+                vid.remove();
+                console.log("Win Condition: Time out, removing video....")
+                // <button class="btn btn-warning font-weight-bold text-white">Next Question</button>
+                console.log("Win Condition: Populating continue button to start the next question.")
             }, 5000);
         }
 
@@ -93,8 +94,8 @@ $(document).ready(function () {
             // Display the question according to the position of our iterator in the 'triviaQuestions' array.
             $('#questionPopulation').append('<div id="playerQuestion" class="text-info"><h4>' + triviaQuestions[i].question + '</div>');
             for (var index = 0; index < triviaQuestions[i].choices.length; index++) {
-                $('#choicePopulation').append('<label class="label_item" for="radio'+ index + 1 +'"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio'+ index + 1 +'" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
-                
+                $('#choicePopulation').append('<label class="label_item" for="radio' + index + 1 + '"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
+
             }
 
             // 5.) Once the player picks the answer they believe to be correct, let the player submit it.
@@ -104,11 +105,12 @@ $(document).ready(function () {
             // 6.) If the player picks the correct answer, let them know, wait five seconds, then continue.
             $('#submitButton').click(function () {
                 if ($('input:radio[name=multipleChoice]:checked').val() === triviaQuestions[i].correctAnswer) {
-                    // Increment the layers score.
+                    // Increment the players score.
                     pCorrectAnswers.text = correctAnswers++;
                     // Populate it to the DOM.
-                    $("#pCorrectAnswers").text(correctAnswers);
+                    $(".pCorrectAnswers").text("Correct Answers: " + correctAnswers);
                     // Show the player their score so far.
+
                     playerCorrect();
                 } else {
                     // 7.) If the players answer is incorrect, let them know, wait five seconds, then continue.
