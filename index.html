@@ -30,7 +30,7 @@
     <div id="selectMenu" class="container">
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <img height="240" src="assets/images/nickLogo.png" alt="nickLogo.png">
+                <img height="200" src="assets/images/nickLogo.png" alt="nickLogo.png">
                 <!-- Description -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p class="lead font-weight-bold">
-                            <button class="btn btn-warning font-weight-bold p-3">Play Now!</button>
+                            <button id="playNow" class="btn btn-warning font-weight-bold p-3">Play Now!</button>
                         </p>
                     </div>
                 </div>
@@ -51,14 +51,25 @@
 
     <!-- Game Area -->
     <div style="display: none;" id="game" class="container text-center">
+        <!-- Card Head Brand -->
         <div class="card">
             <div class="card-header bg-warning font-weight-bold">
-                <h1>90s Nickelodeon Trivia!</h1>
+                <h1>90s Nickelodeon Cartoon Trivia!</h1>
             </div>
+            <!-- Game Body -->
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <!-- Time Remaining -->
+                <h3 id="timeRemaining" class="text-success">
+                    <p></p>
+                </h3>
+                <h2 class="text-warning">Question:</h2>
+                <p id="triviaQuestions" class="lead text-info font-weight-bold"></p>
+                <!-- Question Population -->
+                <div id="questionPopulation"></div>
+                <!-- Multiple Choice Population -->
+                <div id="choicePopulation"></div>
+                <!-- Submit Button -->
+                <div id="btnSubmit"></div>
             </div>
         </div>
     </div>
