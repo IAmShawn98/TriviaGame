@@ -6,8 +6,12 @@ $(document).ready(function () {
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
 
+
     // Define Elements.
     var time = $("#timeRemaining p"); // The timer element.
+
+    var pCorrectAnswers = $("#pCorrectAnswers"); // The correct answer element.
+    var pIncorrectAnswers = $("#pIncorrectAnswers"); // The incorrect answer element.
 
     // When the player clicks on 'Play Now!' a new trivia session is created by the function 'newTriviaSession()'.
     $("#playNow").on("click", function () {
@@ -43,12 +47,40 @@ $(document).ready(function () {
                 choices: ["Jeffery", "Spud", "Skelly", "Spunky"],
                 // The correct answer.
                 correctAnswer: "Spunky"
-            }
+            },
+            {
+                // Question being asked to the player.
+                question: "In which cartoon was the main character nicknamed, 'Football Head'?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["Hey Jerry", "Hey Dude", "Hey Arnold", "Sup Brotha"],
+                // The correct answer.
+                correctAnswer: "Hey Arnold"
+            },
         ];
+
+
+        // If the player wins, do this.
+        var endGameResults = function () {
+            // Hide game.
+            $("#game").hide();
+            // Show score.
+            $("#resultMenu").show();
+        }
 
         // If the player wins, do this.
         var playerCorrect = function () {
-            alert("WIN!");
+            // Hide game.
+            $("#game").hide();
+            // Show score so far.
+            $("#resultMenu").show();
+            // wait five seconds!
+            console.log("Waiting five seconds....")
+            setTimeout(() => {
+                // Hide these results.
+                console.log("Hide results!");
+                // Get back to the game!
+                console.log("Get back to the game!");
+            }, 5000);
         }
 
         // If the player sucks, do this.
@@ -56,16 +88,15 @@ $(document).ready(function () {
             alert("LOSS!");
         }
 
-
         // This function assembles the question we will display in HTML.
         var buildHTMLQuestions = function (i) {
             // Display the question according to the position of our iterator in the 'triviaQuestions' array.
             $('#questionPopulation').append('<div id="playerQuestion" class="text-info"><h4>' + triviaQuestions[i].question + '</div>');
-            // Display the multiple choice answers according to the position of our iterator in the 'triviaQuestions' array.
-            $('#choicePopulation').append('<label class="label_item" for="radio1"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio1" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[0] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[0] + '</span><br>');
-            $('#choicePopulation').append('<label class="label_item" for="radio2"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio2" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[1] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[1] + '</span><br>');
-            $('#choicePopulation').append('<label class="label_item" for="radio3"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio3" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[2] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[2] + '</span><br>');
-            $('#choicePopulation').append('<label class="label_item" for="radio4"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio4" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[3] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[3] + '</span><br> <br>');
+            for (var index = 0; index < triviaQuestions[i].choices.length; index++) {
+                $('#choicePopulation').append('<label class="label_item" for="radio'+ index + 1 +'"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio'+ index + 1 +'" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
+                
+            }
+
             // 5.) Once the player picks the answer they believe to be correct, let the player submit it.
             // Submit Button.
             $('#submitPopulation').append('<button type="submit" class="btn btn-warning text-white p-3 font-weight-bold" id="submitButton">Submit</button>');
@@ -73,6 +104,11 @@ $(document).ready(function () {
             // 6.) If the player picks the correct answer, let them know, wait five seconds, then continue.
             $('#submitButton').click(function () {
                 if ($('input:radio[name=multipleChoice]:checked').val() === triviaQuestions[i].correctAnswer) {
+                    // Increment the layers score.
+                    pCorrectAnswers.text = correctAnswers++;
+                    // Populate it to the DOM.
+                    $("#pCorrectAnswers").text(correctAnswers);
+                    // Show the player their score so far.
                     playerCorrect();
                 } else {
                     // 7.) If the players answer is incorrect, let them know, wait five seconds, then continue.
@@ -80,6 +116,7 @@ $(document).ready(function () {
                 }
             })
         }
+
         // Start the question array iterator at zero to properly define which question to start with in the array.
         buildHTMLQuestions(questionNumber);
 
