@@ -41,30 +41,43 @@ $(document).ready(function () {
                 question: "In Rocko's Modern Life, what is the name of Rocko's pet dog?",
                 //  4.) Multiple choice questions for the player to pick from.
                 choices: ["Jeffery", "Spud", "Skelly", "Spunky"],
-                // The correct answer is equal to the position in the array index.
-                answer: 3
+                // The correct answer.
+                correctAnswer: "Spunky"
             }
         ];
+
+        // If the player wins, do this.
+        var playerCorrect = function () {
+            alert("WIN!");
+        }
+
+        // If the player sucks, do this.
+        var playerIncorrect = function () {
+            alert("LOSS!");
+        }
 
         // This function assembles the question we will display in HTML.
         var buildHTMLQuestions = function (i) {
             // Display the question according to the position of our iterator in the 'triviaQuestions' array.
             $('#questionPopulation').append('<div id="playerQuestion" class="text-info"><h4>' + triviaQuestions[i].question + '</div>');
             // Display the multiple choice answers according to the position of our iterator in the 'triviaQuestions' array.
-            $('#choicePopulation').append('<input type="radio" name="questionChoices" value="' + triviaQuestions[i].choices[0] + '" checked="yes">' + triviaQuestions[i].choices[0] + '</input>');
-            $('#choicePopulation').append('<input type="radio" name="questionChoices" value="' + triviaQuestions[i].choices[1] + '" checked="yes">' + triviaQuestions[i].choices[1] + '</input>');
-            $('#choicePopulation').append('<input type="radio" name="questionChoices" value="' + triviaQuestions[i].choices[2] + '" checked="yes">' + triviaQuestions[i].choices[2] + '</input>');
-            $('#choicePopulation').append('<input type="radio" name="questionChoices" value="' + triviaQuestions[i].choices[3] + '" checked="yes">' + triviaQuestions[i].choices[3] + '</input>');
-
+            $('#choicePopulation').append('<input type="radio" name="multipleChoice" value="' + triviaQuestions[i].choices[0] + '" checked="yes">' + triviaQuestions[i].choices[0] + '<br>');
+            $('#choicePopulation').append('<input type="radio" name="multipleChoice" value="' + triviaQuestions[i].choices[1] + '">' + triviaQuestions[i].choices[1] + '<br>');
+            $('#choicePopulation').append('<input type="radio" name="multipleChoice" value="' + triviaQuestions[i].choices[2] + '">' + triviaQuestions[i].choices[2] + '<br>');
+            $('#choicePopulation').append('<input type="radio" name="multipleChoice" value="' + triviaQuestions[i].choices[3] + '">' + triviaQuestions[i].choices[3] + '<br> <br>');
             // 5.) Once the player picks the answer they believe to be correct, let the player submit it.
-
             // Submit Button.
-            $('#btnSubmit').append('<button id="submitButton">Submit</button>');
+            $('#submitPopulation').append('<button type="submit" id="submitButton">Submit</button>');
 
-            // 6.) If the players answer is correct, congradulate them, wait five seconds, then continue.
-
-            // 7.) If the players answer is incorrect, let them know, wait five seconds, then continue.
-
+            // 6.) If the player picks the correct answer, let them know, wait five seconds, then continue.
+            $('#submitButton').click(function () {
+                if ($('input:radio[name=multipleChoice]:checked').val() === triviaQuestions[i].correctAnswer && i < 4) {
+                    playerCorrect();
+                } else {
+                    // 7.) If the players answer is incorrect, let them know, wait five seconds, then continue.
+                    playerIncorrect();
+                }
+            })
         }
         // Start the question array iterator at zero to properly define which question to start with in the array.
         buildHTMLQuestions(questionNumber);
