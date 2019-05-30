@@ -113,7 +113,7 @@ $(document).ready(function () {
             // Display the question according to the position of our iterator in the 'triviaQuestions' array.
             $('#questionPopulation').append('<div id="playerQuestion" class="text-info"><h4>' + triviaQuestions[i].question + '</div>');
             for (var index = 0; index < triviaQuestions[i].choices.length; index++) {
-                $('#choicePopulation').append('<label  for="radio' + index + 1 + '"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
+                $('#choicePopulation').append('<label class="label_item" for="radio' + index + 1 + '"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
 
             }
 
