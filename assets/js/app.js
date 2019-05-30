@@ -11,7 +11,6 @@ $(document).ready(function () {
     var pCorrectAnswers = $(".pCorrectAnswers"); // The correct answer element.
     var pIncorrectAnswers = $(".pIncorrectAnswers"); // The incorrect answer element.
     var vid = document.getElementById("correctVideo"); // Play a random clip when the player wins.
-    var populateNextQuestionBtn = $("#populateNextQuestionBtn");
 
     // When the player clicks on 'Play Now!' a new trivia session is created by the function 'newTriviaSession()'.
     $("#playNow").on("click", function () {
@@ -56,6 +55,14 @@ $(document).ready(function () {
                 // The correct answer.
                 correctAnswer: "Hey Arnold"
             },
+            {
+                // Question being asked to the player.
+                question: "In which cartoon was the main character nicknamed 'Football Head'?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["Hey Jerry", "Hey Dude", "Hey Arnold", "Sup Brotha"],
+                // The correct answer.
+                correctAnswer: "Hey Arnold"
+            },
         ];
 
         // If the player finishes the game, do this.
@@ -78,10 +85,21 @@ $(document).ready(function () {
             console.log("Win Condition: Playing video, waiting five seconds...")
             setTimeout(() => {
                 // Remove finished video.
-                vid.remove();
-                console.log("Win Condition: Time out, removing video....")
-                $('#populateNextQuestionBtn').append('<button class="btn btn-warning text-white p-3 font-weight-bold" id="nextQuestion">Next Question</button>');
-                console.log("Win Condition: Populating continue button to start the next question.")
+                $('#populateNextQuestionBtn')
+                    .append('<button class="btn btn-warning text-white p-3 font-weight-bold" id="nextQuestion">Next Question</button>');
+
+                // When the player clicks on the next question, empty out the old questions and continue the game.
+                $('#nextQuestion').click(function () {
+                    $("#questionPopulation").empty();
+                    $("#choicePopulation").empty();
+                    $("#submitPopulation").empty();
+                    // Show game.
+                    $("#game").show();
+                    // Hide score so far.
+                    $("#currentScore").hide();
+                    questionNumber++;
+                    buildHTMLQuestions(questionNumber);
+                })
             }, 5000);
         }
 
@@ -95,7 +113,7 @@ $(document).ready(function () {
             // Display the question according to the position of our iterator in the 'triviaQuestions' array.
             $('#questionPopulation').append('<div id="playerQuestion" class="text-info"><h4>' + triviaQuestions[i].question + '</div>');
             for (var index = 0; index < triviaQuestions[i].choices.length; index++) {
-                $('#choicePopulation').append('<label class="label_item" for="radio' + index + 1 + '"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
+                $('#choicePopulation').append('<label  for="radio' + index + 1 + '"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
 
             }
 
