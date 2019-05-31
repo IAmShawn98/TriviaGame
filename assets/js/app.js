@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Global Variables.
-    var secondsLeft = 20 // The amount of time left in each new trivia session.
+    var secondsLeft = 40 // The amount of time left in each new trivia session.
     var correctAnswers = 0; // The players total correct answers.
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
@@ -95,6 +95,14 @@ $(document).ready(function () {
                 // The correct answer.
                 correctAnswer: "Krumm"
             },
+            {
+                // Question being asked to the player.
+                question: "In 'Rugrats' what was the name of the doctor Didi heavily relied on for child support?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["Dr. LumpNuts", "Professor Uncle", "Dr. Slipshiz", "Dr. Lipschitz"],
+                // The correct answer.
+                correctAnswer: "Dr. Lipschitz"
+            },
         ];
 
         // If the player finishes the game, do this.
@@ -122,15 +130,27 @@ $(document).ready(function () {
 
                 // When the player clicks on the next question, empty out the old questions and continue the game.
                 $('#nextQuestion').click(function () {
+                    // Clear Last Question
                     $("#questionPopulation").empty();
+                    // Clear last round of multiple choice answers.
                     $("#choicePopulation").empty();
+                    // Clear last submit population.
                     $("#submitPopulation").empty();
-                    // Show game.
-                    $("#game").show();
+                    // Clear last next question button population.
+                    $("#populateNextQuestionBtn").empty();
                     // Hide score so far.
                     $("#currentScore").hide();
+                    // Show game.
+                    $("#game").show();
+                    // Give the player another point for the correct answer.
                     questionNumber++;
-                    buildHTMLQuestions(questionNumber);
+                    // If the player comes to the end of the question array, show the result screen.
+                    if (questionNumber === 8) {
+                        endGameResults();
+                    } else {
+                        // Otherwise, continue to the next question.
+                        buildHTMLQuestions(questionNumber);
+                    }
                 })
             }, 5000);
         }
