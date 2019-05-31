@@ -142,7 +142,7 @@ $(document).ready(function () {
                     $("#currentScore").hide();
                     // Show game.
                     $("#game").show();
-                    // Give the player another point for the correct answer.
+                    // Increment the value of the question array so the game lets the player move on.
                     questionNumber++;
                     // If the player comes to the end of the question array, show the result screen.
                     if (questionNumber === 8) {
@@ -157,7 +157,27 @@ $(document).ready(function () {
 
         // If the player sucks, do this.
         var playerIncorrect = function () {
-            alert("LOSS!");
+            // Clear Last Question
+            $("#questionPopulation").empty();
+            // Clear last round of multiple choice answers.
+            $("#choicePopulation").empty();
+            // Clear last submit population.
+            $("#submitPopulation").empty();
+            // Clear last next question button population.
+            $("#populateNextQuestionBtn").empty();
+            // Hide score so far.
+            $("#currentScore").hide();
+            // Show game.
+            $("#game").show();
+            // Increment the value of the question array so the game lets the player move on.
+            questionNumber++;
+            // If the player comes to the end of the question array, show the result screen.
+            if (questionNumber === 8) {
+                endGameResults();
+            } else {
+                // Otherwise, continue to the next question.
+                buildHTMLQuestions(questionNumber);
+            }
         }
 
         // This function assembles the question we will display in HTML.
@@ -180,11 +200,17 @@ $(document).ready(function () {
                     pCorrectAnswers.text = correctAnswers++;
                     // Populate it to the DOM.
                     $(".pCorrectAnswers").text("Correct Answers: " + correctAnswers);
-                    // Show the player their score so far.
-
+                    // Congradulate player!
                     playerCorrect();
                 } else {
                     // 7.) If the players answer is incorrect, let them know, wait five seconds, then continue.
+                    // Increment the players loss counter.
+                    pIncorrectAnswers.text = incorrectAnswers++;
+                    // Populate it to the DOM.
+                    $(".pIncorrectAnswers").text("Incorrect Answers: " + incorrectAnswers);
+                    // Show the player their score so far.
+
+                    // Disappoint Player.
                     playerIncorrect();
                 }
             })
