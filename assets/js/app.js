@@ -57,11 +57,43 @@ $(document).ready(function () {
             },
             {
                 // Question being asked to the player.
-                question: "In which cartoon was the main character nicknamed 'Football Head'?",
+                question: "In Doug, what was the name of the school bully?",
                 //  4.) Multiple choice questions for the player to pick from.
-                choices: ["Hey Jerry", "Hey Dude", "Hey Arnold", "Sup Brotha"],
+                choices: ["Henry", "Ross", "Rick", "Roger"],
                 // The correct answer.
-                correctAnswer: "Hey Arnold"
+                correctAnswer: "Roger"
+            },
+            {
+                // Question being asked to the player.
+                question: "Who sung the 'Happy, Happy, Joy, Joy' song from 'The Ren and Stimpy Show'?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["Furry Waffleneck", "Smelly Stinkyteets", "Professor Wiggles", "Stinky Wizzleteats"],
+                // The correct answer.
+                correctAnswer: "Stinky Wizzleteats"
+            },
+            {
+                // Question being asked to the player.
+                question: "In Rockos Modern Life, what was the name of the Dark Underlord?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["Graig", "Grim", "Paul", "Peaches"],
+                // The correct answer.
+                correctAnswer: "Peaches"
+            },
+            {
+                // Question being asked to the player.
+                question: "When was the first ever airing of 'Spongebob Squarepants'?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["May 1, 1999", "July 3, 1998", "April 7, 1997", "March 2, 1999"],
+                // The correct answer.
+                correctAnswer: "May 1, 1999"
+            },
+            {
+                // Question being asked to the player.
+                question: "In 'Aaahh!!! Real Monsters' which monster held his eyeballs?",
+                //  4.) Multiple choice questions for the player to pick from.
+                choices: ["Graig", "Krumm", "Ickis", "Oblina"],
+                // The correct answer.
+                correctAnswer: "Krumm"
             },
         ];
 
