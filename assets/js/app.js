@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Global Variables.
-    var secondsLeft = 40 // The amount of time left in each new trivia session.
+    var secondsLeft = 8 // The amount of time left in each new trivia session.
     var correctAnswers = 0; // The players total correct answers.
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
@@ -10,7 +10,9 @@ $(document).ready(function () {
     var time = $("#timeRemaining p"); // The timer element.
     var pCorrectAnswers = $(".pCorrectAnswers"); // The correct answer element.
     var pIncorrectAnswers = $(".pIncorrectAnswers"); // The incorrect answer element.
-    var vid = document.getElementById("correctVideo"); // Play a random clip when the player wins.
+    var vid = document.getElementById("correctVideo"); // video player element.
+    var triviaPercentScore = $("#triviaPercentScore"); // The trivia score percent element.
+
 
     // When the player clicks on 'Play Now!' a new trivia session is created by the function 'newTriviaSession()'.
     $("#playNow").on("click", function () {
@@ -34,6 +36,7 @@ $(document).ready(function () {
             if (secondsLeft === -1) {
                 // alert("Times Up!");
                 clearInterval(timeRemaining);
+                endGameResults();
             }
         }, 1000);
 
@@ -111,6 +114,8 @@ $(document).ready(function () {
             $("#game").hide();
             // Show score.
             $("#resultMenu").show();
+            // Populate Players Trivia Percentage.
+            triviaPercentScore.text(100 / 8 * correctAnswers + "%");
         }
 
         // If the player wins, do this.
@@ -200,6 +205,7 @@ $(document).ready(function () {
                     pCorrectAnswers.text = correctAnswers++;
                     // Populate it to the DOM.
                     $(".pCorrectAnswers").text("Correct Answers: " + correctAnswers);
+                    clearInterval(timeRemaining);
                     // Congradulate player!
                     playerCorrect();
                 } else {
