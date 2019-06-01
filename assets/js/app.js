@@ -24,10 +24,10 @@ $(document).ready(function () {
         newTriviaSession();
     })
 
-    // 1.) Create a function that begins the trivia games functionality.
+    // This function begins the app functionality.
     function newTriviaSession() {
 
-        // 2.) Create a countdown timer that gives the player a limited amount of time to complete a question.
+        // 2.) This is where we call our countdown timer, giving the player a limited amount of time to answer questions.
 
         // Timer: Deducts seconds from the 'seconds' variable.
         var timeRemaining = setInterval(function () {
@@ -46,7 +46,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "In Rocko's Modern Life, what is the name of Rocko's pet dog?",
-                //  4.) Multiple choice questions for the player to pick from.
+                //  Multiple choice questions for the player to pick from.
                 choices: ["Jeffery", "Spud", "Skelly", "Spunky"],
                 // The correct answer.
                 correctAnswer: "Spunky"
@@ -54,7 +54,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "In which cartoon was the main character nicknamed 'Football Head'?",
-                //  4.) Multiple choice questions for the player to pick from.
+                //  Multiple choice questions for the player to pick from.
                 choices: ["Hey Jerry", "Hey Dude", "Hey Arnold", "Sup Brotha"],
                 // The correct answer.
                 correctAnswer: "Hey Arnold"
@@ -62,7 +62,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "In Doug, what was the name of the school bully?",
-                //  4.) Multiple choice questions for the player to pick from.
+                // Multiple choice questions for the player to pick from.
                 choices: ["Henry", "Ross", "Rick", "Roger"],
                 // The correct answer.
                 correctAnswer: "Roger"
@@ -70,7 +70,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "Who sung the 'Happy, Happy, Joy, Joy' song from 'The Ren and Stimpy Show'?",
-                //  4.) Multiple choice questions for the player to pick from.
+                // Multiple choice questions for the player to pick from.
                 choices: ["Furry Waffleneck", "Smelly Stinkyteets", "Professor Wiggles", "Stinky Wizzleteats"],
                 // The correct answer.
                 correctAnswer: "Stinky Wizzleteats"
@@ -78,7 +78,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "In Rockos Modern Life, what was the name of the Dark Underlord?",
-                //  4.) Multiple choice questions for the player to pick from.
+                // Multiple choice questions for the player to pick from.
                 choices: ["Graig", "Grim", "Paul", "Peaches"],
                 // The correct answer.
                 correctAnswer: "Peaches"
@@ -86,7 +86,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "When was the first ever airing of 'Spongebob Squarepants'?",
-                //  4.) Multiple choice questions for the player to pick from.
+                // Multiple choice questions for the player to pick from.
                 choices: ["May 1, 1999", "July 3, 1998", "April 7, 1997", "March 2, 1999"],
                 // The correct answer.
                 correctAnswer: "May 1, 1999"
@@ -94,7 +94,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "In 'Aaahh!!! Real Monsters' which monster held his eyeballs?",
-                //  4.) Multiple choice questions for the player to pick from.
+                // Multiple choice questions for the player to pick from.
                 choices: ["Graig", "Krumm", "Ickis", "Oblina"],
                 // The correct answer.
                 correctAnswer: "Krumm"
@@ -102,7 +102,7 @@ $(document).ready(function () {
             {
                 // Question being asked to the player.
                 question: "In 'Rugrats' what was the name of the doctor Didi heavily relied on for child support?",
-                //  4.) Multiple choice questions for the player to pick from.
+                //  Multiple choice questions for the player to pick from.
                 choices: ["Dr. LumpNuts", "Professor Uncle", "Dr. Slipshiz", "Dr. Lipschitz"],
                 // The correct answer.
                 correctAnswer: "Dr. Lipschitz"
@@ -220,7 +220,7 @@ $(document).ready(function () {
             // Submit Button.
             $('#submitPopulation').append('<button type="submit" class="btn btn-warning text-white p-3 font-weight-bold" id="submitButton">Submit</button>');
 
-            // 6.) If the player picks the correct answer, let them know, wait five seconds, then continue.
+            // If the player picks the correct answer, let them know, wait five seconds, then continue.
             $('#submitButton').click(function () {
                 if ($('input:radio[name=multipleChoice]:checked').val() === triviaQuestions[i].correctAnswer) {
                     // Increment the players score.
@@ -231,7 +231,7 @@ $(document).ready(function () {
                     // Congradulate player!
                     playerCorrect();
                 } else {
-                    // 7.) If the players answer is incorrect, let them know, wait five seconds, then continue.
+                    // If the players answer is incorrect, let them know, wait five seconds, then continue.
                     // Increment the players loss counter.
                     pIncorrectAnswers.text = incorrectAnswers++;
                     // Populate it to the DOM.
