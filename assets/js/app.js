@@ -208,9 +208,13 @@ $(document).ready(function () {
             // Display the question according to the position of our iterator in the 'triviaQuestions' array.
             $('#questionPopulation').append('<div id="playerQuestion" class="text-info"><h4>' + triviaQuestions[i].question + '</div>');
             for (var index = 0; index < triviaQuestions[i].choices.length; index++) {
-                $('#choicePopulation').append('<label class="label_item" for="radio' + index + 1 + '"><img width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
-
+                $('#choicePopulation').append('<label class="label_item" for="radio' + index + 1 + '"><img class="imageTick" width="60" height="60" src="assets/images/decorations/orangeSoda.png"></label> <input type="radio" id="radio' + index + 1 + '" class="radio_item" name="multipleChoice" value="' + triviaQuestions[i].choices[index] + '" checked="yes"><span class="text-warning font-weight-bold"> ' + triviaQuestions[i].choices[index] + '</span><br>');
             }
+
+            // When the player clicks on an orange soda, turn it into a checkmark.
+            $(".imageTick").on("click", function () {
+                $(this).attr('src', 'assets/images/decorations/tick.png');
+            });
 
             // 5.) Once the player picks the answer they believe to be correct, let the player submit it.
             // Submit Button.
@@ -242,10 +246,6 @@ $(document).ready(function () {
         // Start the question array iterator at zero to properly define which question to start with in the array.
         buildHTMLQuestions(questionNumber);
 
-        // When the player clicks on an orange soda, turn it into a checkmark.
-        $("img").on("click", function () {
-            $(this).attr('src', 'assets/images/decorations/tick.png');
-        });
     }
 });
 
