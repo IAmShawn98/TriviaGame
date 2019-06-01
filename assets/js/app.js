@@ -10,7 +10,8 @@ $(document).ready(function () {
     var time = $("#timeRemaining p"); // The timer element.
     var pCorrectAnswers = $(".pCorrectAnswers"); // The correct answer element.
     var pIncorrectAnswers = $(".pIncorrectAnswers"); // The incorrect answer element.
-    var vid = document.getElementById("correctVideo"); // video player element.
+    var correctVid = document.getElementById("correctVideo"); // video player element.
+    var incorrectVid = document.getElementById("incorrectVideo"); // video player element.
     var triviaPercentScore = $("#triviaPercentScore"); // The trivia score percent element.
 
 
@@ -121,20 +122,20 @@ $(document).ready(function () {
         // If the player wins, do this.
         var playerCorrect = function () {
             // Start correct answer video.
-            vid.play()
+            correctVid.play()
             // Hide game.
             $("#game").hide();
             // Show score so far.
-            $("#currentScore").show();
+            $("#currentScoreWin").show();
             // wait five seconds!
             console.log("Win Condition: Playing video, waiting five seconds...")
             setTimeout(() => {
                 // Remove finished video.
-                $('#populateNextQuestionBtn')
-                    .append('<button class="btn btn-warning text-white p-3 font-weight-bold" id="nextQuestion">Next Question</button>');
+                $('.populateNextQuestionBtn')
+                    .append('<button class="btn btn-warning text-white p-3 font-weight- nextQuestion">Next Question</button>');
 
                 // When the player clicks on the next question, empty out the old questions and continue the game.
-                $('#nextQuestion').click(function () {
+                $('.nextQuestion').click(function () {
                     // Clear Last Question
                     $("#questionPopulation").empty();
                     // Clear last round of multiple choice answers.
@@ -142,9 +143,9 @@ $(document).ready(function () {
                     // Clear last submit population.
                     $("#submitPopulation").empty();
                     // Clear last next question button population.
-                    $("#populateNextQuestionBtn").empty();
+                    $(".populateNextQuestionBtn").empty();
                     // Hide score so far.
-                    $("#currentScore").hide();
+                    $("#currentScoreWin").hide();
                     // Show game.
                     $("#game").show();
                     // Increment the value of the question array so the game lets the player move on.
@@ -162,27 +163,44 @@ $(document).ready(function () {
 
         // If the player sucks, do this.
         var playerIncorrect = function () {
-            // Clear Last Question
-            $("#questionPopulation").empty();
-            // Clear last round of multiple choice answers.
-            $("#choicePopulation").empty();
-            // Clear last submit population.
-            $("#submitPopulation").empty();
-            // Clear last next question button population.
-            $("#populateNextQuestionBtn").empty();
-            // Hide score so far.
-            $("#currentScore").hide();
-            // Show game.
-            $("#game").show();
-            // Increment the value of the question array so the game lets the player move on.
-            questionNumber++;
-            // If the player comes to the end of the question array, show the result screen.
-            if (questionNumber === 8) {
-                endGameResults();
-            } else {
-                // Otherwise, continue to the next question.
-                buildHTMLQuestions(questionNumber);
-            }
+            // Start incorrect answer video.
+            incorrectVid.play()
+            // Hide game.
+            $("#game").hide();
+            // Show score so far.
+            $("#currentScoreLoss").show();
+            // wait five seconds!
+            console.log("Win Condition: Playing video, waiting five seconds...")
+            setTimeout(() => {
+                // Remove finished video.
+                $('.populateNextQuestionBtn')
+                    .append('<button class="btn btn-warning text-white p-3 font-weight-bold nextQuestion">Next Question</button>');
+
+                // When the player clicks on the next question, empty out the old questions and continue the game.
+                $('.nextQuestion').click(function () {
+                    // Clear Last Question
+                    $("#questionPopulation").empty();
+                    // Clear last round of multiple choice answers.
+                    $("#choicePopulation").empty();
+                    // Clear last submit population.
+                    $("#submitPopulation").empty();
+                    // Clear last next question button population.
+                    $(".populateNextQuestionBtn").empty();
+                    // Hide score so far.
+                    $("#currentScoreLoss").hide();
+                    // Show game.
+                    $("#game").show();
+                    // Increment the value of the question array so the game lets the player move on.
+                    questionNumber++;
+                    // If the player comes to the end of the question array, show the result screen.
+                    if (questionNumber === 8) {
+                        endGameResults();
+                    } else {
+                        // Otherwise, continue to the next question.
+                        buildHTMLQuestions(questionNumber);
+                    }
+                })
+            }, 5000);
         }
 
         // This function assembles the question we will display in HTML.
@@ -214,8 +232,7 @@ $(document).ready(function () {
                     pIncorrectAnswers.text = incorrectAnswers++;
                     // Populate it to the DOM.
                     $(".pIncorrectAnswers").text("Incorrect Answers: " + incorrectAnswers);
-                    // Show the player their score so far.
-
+                    clearInterval(timeRemaining);
                     // Disappoint Player.
                     playerIncorrect();
                 }
