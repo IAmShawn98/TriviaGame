@@ -5,6 +5,7 @@ $(document).ready(function () {
     var correctAnswers = 0; // The players total correct answers.
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
+    var letterGrade = []; // Players letter grade.
 
     // Define Elements.
     var time = $("#timeRemaining p"); // The timer element.
@@ -27,7 +28,7 @@ $(document).ready(function () {
     // This function begins the app functionality.
     function newTriviaSession() {
 
-        // 2.) This is where we call our countdown timer, giving the player a limited amount of time to answer questions.
+        // This is where we call our countdown timer, giving the player a limited amount of time to answer questions.
 
         // Timer: Deducts seconds from the 'seconds' variable.
         var timeRemaining = setInterval(function () {
@@ -115,7 +116,7 @@ $(document).ready(function () {
             $("#game").hide();
             // Show score.
             $("#resultMenu").show();
-            // Populate Players Trivia Percentage.
+            // Populate Players Trivia Percentage & Letter Grade.
             triviaPercentScore.text(100 / 8 * correctAnswers + "%");
         }
 
@@ -128,7 +129,6 @@ $(document).ready(function () {
             // Show score so far.
             $("#currentScoreWin").show();
             // wait five seconds!
-            console.log("Win Condition: Playing video, waiting five seconds...")
             setTimeout(() => {
                 // Remove finished video.
                 $('.populateNextQuestionBtn')
@@ -170,7 +170,6 @@ $(document).ready(function () {
             // Show score so far.
             $("#currentScoreLoss").show();
             // wait five seconds!
-            console.log("Win Condition: Playing video, waiting five seconds...")
             setTimeout(() => {
                 // Remove finished video.
                 $('.populateNextQuestionBtn')
@@ -216,7 +215,8 @@ $(document).ready(function () {
                 $(this).attr('src', 'assets/images/decorations/tick.png');
             });
 
-            // 5.) Once the player picks the answer they believe to be correct, let the player submit it.
+            // Once the player picks the answer they believe to be correct, let the player submit it.
+
             // Submit Button.
             $('#submitPopulation').append('<button type="submit" class="btn btn-warning text-white p-3 font-weight-bold" id="submitButton">Submit</button>');
 
@@ -242,10 +242,8 @@ $(document).ready(function () {
                 }
             })
         }
-
         // Start the question array iterator at zero to properly define which question to start with in the array.
         buildHTMLQuestions(questionNumber);
-
     }
 });
 
