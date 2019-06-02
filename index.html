@@ -126,6 +126,10 @@
                 <h1>90s Nickelodeon Cartoon Trivia!</h1>
             </div>
             <div class="card-body">
+                <!-- Message if the timer runs out and the player is brought here -->
+                <div style="display: none;" class="alert alert-warning fade show" role="alert">
+                    <strong>Times Up!</strong> You ran out of time on the clock!
+                </div>
                 <h1 class="text-success">Here are your results!</h1>
                 <!-- Correct Answers -->
                 <h4 class="pCorrectAnswers text-info">Correct Answers: 0</h4>
@@ -133,7 +137,7 @@
                 <h4 class="pIncorrectAnswers text-info">Incorrect Answers: 0</h4>
                 <br>
                 <!-- Trivia Percentage Population -->
-                <h3 class="text-primary">Total Score:</h3 >
+                <h3 class="text-primary">Total Score:</h3>
                 <!-- The Percent Population Element -->
                 <h2 id="triviaPercentScore"></h2>
                 <br>

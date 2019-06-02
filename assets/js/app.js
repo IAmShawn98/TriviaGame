@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Global Variables.
-    var secondsLeft = 8 // The amount of time left in each new trivia session.
+    var secondsLeft = 38 // The amount of time left in each new trivia session.
     var correctAnswers = 0; // The players total correct answers.
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
@@ -14,7 +14,6 @@ $(document).ready(function () {
     var correctVid = document.getElementById("correctVideo"); // video player element.
     var incorrectVid = document.getElementById("incorrectVideo"); // video player element.
     var triviaPercentScore = $("#triviaPercentScore"); // The trivia score percent element.
-
 
     // When the player clicks on 'Play Now!' a new trivia session is created by the function 'newTriviaSession()'.
     $("#playNow").on("click", function () {
@@ -38,6 +37,7 @@ $(document).ready(function () {
             if (secondsLeft === -1) {
                 // alert("Times Up!");
                 clearInterval(timeRemaining);
+                $(".alert").show();
                 endGameResults();
             } else if (isPaused === true) {
                 clearInterval(timeRemaining);
