@@ -5,7 +5,7 @@ $(document).ready(function () {
     var correctAnswers = 0; // The players total correct answers.
     var incorrectAnswers = 0; // The players total incorrect answers.
     var questionNumber = 0; // The question number the player is on in the array.
-    var letterGrade = []; // Players letter grade.
+    var isPaused = false; // Flag to check if the timer is paused or not.
 
     // Define Elements.
     var time = $("#timeRemaining p"); // The timer element.
@@ -39,6 +39,10 @@ $(document).ready(function () {
                 // alert("Times Up!");
                 clearInterval(timeRemaining);
                 endGameResults();
+            } else if (isPaused === true) {
+                clearInterval(timeRemaining);
+            } else if (!isPaused === true) {
+                console.log("Counting Down....");
             }
         }, 1000);
 
@@ -155,6 +159,21 @@ $(document).ready(function () {
                         endGameResults();
                     } else {
                         // Otherwise, continue to the next question.
+                        isPaused = false;
+                        var timeRemaining = setInterval(function () {
+                            // Deduct time from player.
+                            time.text("Time Remaining: " + secondsLeft--);
+                            // PLUS: If the player runs out of time for a question, let them know, wait five seconds, then continue.
+                            if (secondsLeft === -1) {
+                                // alert("Times Up!");
+                                clearInterval(timeRemaining);
+                                endGameResults();
+                            } else if (isPaused === true) {
+                                clearInterval(timeRemaining);
+                            } else if (!isPaused === true) {
+                                console.log("Counting Down....");
+                            }
+                        }, 1000);
                         buildHTMLQuestions(questionNumber);
                     }
                 })
@@ -196,6 +215,22 @@ $(document).ready(function () {
                         endGameResults();
                     } else {
                         // Otherwise, continue to the next question.
+                        isPaused = false;
+                        var timeRemaining = setInterval(function () {
+                            // Deduct time from player.
+                            time.text("Time Remaining: " + secondsLeft--);
+                            // PLUS: If the player runs out of time for a question, let them know, wait five seconds, then continue.
+                            if (secondsLeft === -1) {
+                                // alert("Times Up!");
+                                clearInterval(timeRemaining);
+                                endGameResults();
+                            } else if (isPaused === true) {
+                                clearInterval(timeRemaining);
+                                console.log("Timer: Counter Paused!");
+                            } else if (!isPaused === true) {
+                                console.log("Timer: Counting Down....");
+                            }
+                        }, 1000);
                         buildHTMLQuestions(questionNumber);
                     }
                 })
@@ -227,8 +262,8 @@ $(document).ready(function () {
                     pCorrectAnswers.text = correctAnswers++;
                     // Populate it to the DOM.
                     $(".pCorrectAnswers").text("Correct Answers: " + correctAnswers);
-                    clearInterval(timeRemaining);
                     // Congradulate player!
+                    isPaused = true;
                     playerCorrect();
                 } else {
                     // If the players answer is incorrect, let them know, wait five seconds, then continue.
@@ -236,8 +271,8 @@ $(document).ready(function () {
                     pIncorrectAnswers.text = incorrectAnswers++;
                     // Populate it to the DOM.
                     $(".pIncorrectAnswers").text("Incorrect Answers: " + incorrectAnswers);
-                    clearInterval(timeRemaining);
                     // Disappoint Player.
+                    isPaused = true;
                     playerIncorrect();
                 }
             })
